@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    function isValidDateOrder(data) {
+      return data.keys().hasAll(['vibe', 'activity', 'food', 'dateStr', 'coupleId', 'createdAt'])
+        && data.keys().size() == 6
+        && data.vibe is string && data.vibe.size() <= 100
+        && data.activity is string && data.activity.size() <= 100
+        && data.food is string && data.food.size() <= 100
+        && data.dateStr is string && data.dateStr.size() <= 50
+        && data.coupleId is string && data.coupleId.size() <= 128 && data.coupleId.matches('^[a-zA-Z0-9_\\-]+$')
+        && data.createdAt is timestamp;
+    }
+
+    match /couples/{coupleId}/orders/{orderId} {
+      // Allowed for any signed in user (anonymous allowed) given they know the coupleId.
+      allow read: if isSignedIn() && isValidId(coupleId);
+      allow create: if isSignedIn() 
+                    && isValidId(coupleId) 
+                    && isValidId(orderId) 
+                    && isValidDateOrder(incoming()) 
+                    && incoming().coupleId == coupleId 
+                    && incoming().createdAt == request.time;
+      allow delete: if isSignedIn() && isValidId(coupleId) && isValidId(orderId);
+      // We don't need update for date orders currently
+    }
+  }
+}

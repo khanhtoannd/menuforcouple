@@ -1,0 +1,24 @@
+{
+  "entities": {
+    "DateOrder": {
+      "title": "Date Order",
+      "description": "Represents a planned date.",
+      "type": "object",
+      "properties": {
+        "vibe": { "type": "string", "maxLength": 100 },
+        "activity": { "type": "string", "maxLength": 100 },
+        "food": { "type": "string", "maxLength": 100 },
+        "dateStr": { "type": "string", "maxLength": 50 },
+        "coupleId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["vibe", "activity", "food", "dateStr", "coupleId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/couples/{coupleId}/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/DateOrder" },
+      "description": "The date orders created by a specific couple, identified by a shared coupleId in the URL."
+    }
+  }
+}

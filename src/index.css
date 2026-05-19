@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+}
+
+.menu-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.menu-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
