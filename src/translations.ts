@@ -4,7 +4,7 @@ export const t = {
   en: {
     // CafeFront
     cafeTitle: "The Purr-fect Café",
-    cafeEst: "est. 2024 • exclusively for you",
+    cafeEst: "est. 2026 • exclusively for you",
     stepInside: "Step Inside",
 
     // CafeMenu
@@ -106,7 +106,7 @@ export const t = {
   vi: {
     // CafeFront
     cafeTitle: "Quán Cà Phê Mèo Pơ-phệc",
-    cafeEst: "thành lập 2024 • dành riêng cho em",
+    cafeEst: "thành lập 2026 • dành riêng cho em",
     stepInside: "Vào quán",
 
     // CafeMenu
@@ -208,7 +208,7 @@ export const t = {
   zh: {
     // CafeFront
     cafeTitle: "完美的猫咪咖啡馆",
-    cafeEst: "始于 2024 • 专属于你",
+    cafeEst: "始于 2026 • 专属于你",
     stepInside: "请进",
 
     // CafeMenu
